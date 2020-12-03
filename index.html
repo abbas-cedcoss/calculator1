@@ -1,204 +1,186 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
-  <title>
-    Calculator
-  </title>
-  <style type="text/css">
-     html {
-      font-size: 62.5%;
-      box-sizing: border-box;
-    }
-
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: inherit;
-    }
-    #acbtn:hover{
-      background-color: #800000;
-    }
-
-    .hoverOnOperations:hover{
-      background-color: #1f2426;
-    }
-
-    .calculator {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      height: auto;
-      box-shadow: 0 0 35px black;
-    }
-
-    .calculator-screen {
-      width: 100%;
-      height: 120px;
-      border: none;
-      background-color: #add8e6;
-      color: #fff;
-      padding-right: 20px;
-      padding-left: 10px;
-      font-size: 4rem;
-    }
-
-    button {
-      height: 55px;
-      font-size: 2rem!important;
-      box-shadow: 1px 1px 5px black;
-    }
-
-    .calculator-keys {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 12px;
-      padding: 20px;
-      background-image: linear-gradient(#f2f8fb,#f2f8fb);
-    }
-    .operator1{
-      background-color: #53666c;
-      color:white;
-      border:none;
-    }
-    .key-decor{
-      border-radius: 5px;
-      border: 0 solid black;
-    }
-      .operator-ac{
-      background-color: #1f2426;
-      color:white;
-      border:none;
-    }
-  @media only screen and (min-width: 600px) and (max-width: 760px) {
-      .calculator {
-      margin-top: 150px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px;
-      height: auto;
-      box-shadow: 0 0 35px black;
-    }
-}
-
-
-  </style>
-  <script type="text/javascript">
-    var displayVal='';
-    var previousVal=0;
-    var opt='+';
-    var result;
-
-    function toggleOff(){
-      var offb = document.getElementById("offbtn").style.backgroundColor="#800000";
-      var onthisbtn = document.getElementById("onbtn").style.backgroundColor="#1f2426"
-      var dat1 = document.getElementsByClassName("offButtons");
-      for(i=0;i<dat1.length;i++)
-      {
-        dat1[i].disabled=true;
-        dat1[i].style.pointerEvents="none";
-      }
-      displayVal="";
-      previousVal=0;
-      opt='+';
-      document.getElementById("result").value="";
-    }
-    function toggleOn(){
-      var offb = document.getElementById("onbtn").style.backgroundColor="#800000";
-      var onthisbtn = document.getElementById("offbtn").style.backgroundColor="#1f2426"
-      var dat1 = document.getElementsByClassName("onButtons");
-      for(i=0;i<dat1.length;i++)
-      {
-        dat1[i].disabled=false;
-        dat1[i].style.pointerEvents="auto";
-      }
-    }
-    function calculate(operand) //for operands
-    {
-      displayVal+=operand;
-      document.getElementById('result').value = displayVal;
-      
-    }
-    function all_clear()
-    {
-      displayVal="";
-      previousVal=0;
-      opt='+';
-      document.getElementById("result").value="";
-    }
-    function operation(operator) //for operators
-    {
-      debugger;
-
-      switch(opt)
-      {
-        case '+':
-        result = parseFloat(parseFloat(previousVal)+ parseFloat(displayVal));
-        document.getElementById('result').value = result;
-        
-        break;
-        case '-':
-        result = parseFloat(parseFloat(previousVal) - parseFloat(displayVal));
-        document.getElementById('result').value = result;
-        
-        break;
-        case '*':
-        result = parseFloat(parseFloat(previousVal)*parseFloat(displayVal));
-        document.getElementById('result').value = result;
-        
-        break;
-        case '/':
-        result = parseFloat(parseFloat(previousVal)/parseFloat(displayVal));
-        document.getElementById('result').value = result;
-        
-        break;
-        case '=':
-        document.getElementById('result').value = result;
-        break;
-      }
-      displayVal='';
-      previousVal=result;
-      opt=operator;
-    }
-  </script>
-</head>
-<body id="bodyId" style="background-color: #eee">
-  <div class="calculator">
-
-    <input type="text" id="result" class="calculator-screen" style="pointer-events: none; font-size: 30px;color: black">
-    <div class="calculator-keys">
-
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('9')">9</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('8')">8</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('7')">7</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('6')">6</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('5')">5</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('4')">4</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('3')">3</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('2')">2</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('1')">1</button>
-      <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="operation('+')">+</button>
-      <button type="button" class="key-decor offButtons onButtons" onclick="calculate('0')">0</button>
-      <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="operation('-')">-</button>
-      <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="calculate('.')">.</button>
-      <button type="button" class="operator1 offButtons onButtons hoverOnOperations" id="mulbtn" onclick="operation('*')">*</button>
-      <button type="button" class="operator1 offButtons onButtons hoverOnOperations" id="divbtn" onclick="operation('=')" >=</button>
-      <!-- AC ON AND OFF BUTTONS -->
-      <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="operation('/')">/</button>
-      <button class="operator-ac" id="onbtn" onclick="toggleOn()" style="background-color: #800000">On</button>
-      <button type="button" class="operator-ac" id="offbtn" onclick="toggleOff()">Off</button>
-      <button type="button" class="operator-ac offButtons onButtons" id="acbtn" onclick="all_clear()" style="grid-column: 1 / 4">AC</button>
-    </div>
-          
-  </div>
-</body>
+   <head>
+      <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+      <meta content="utf-8" http-equiv="encoding">
+      <title>
+         Calculator
+      </title>
+      <style type="text/css">
+         html {
+         font-size: 62.5%;
+         box-sizing: border-box;
+         }
+         *{
+         margin: 0;
+         padding: 0;
+         box-sizing: inherit;
+         }
+         #acbtn:hover{
+         background-color: #800000;
+         }
+         .hoverOnOperations:hover{
+         background-color: #1f2426;
+         }
+         .calculator {
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 300px;
+         height: auto;
+         box-shadow: 0 0 35px black;
+         }
+         .calculator-screen {
+         width: 100%;
+         height: 120px;
+         border: none;
+         background-color: #add8e6;
+         color: #fff;
+         padding-right: 20px;
+         padding-left: 10px;
+         font-size: 4rem;
+         }
+         button {
+         height: 55px;
+         font-size: 2rem!important;
+         box-shadow: 1px 1px 5px black;
+         }
+         .calculator-keys {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         grid-gap: 12px;
+         padding: 20px;
+         background-image: linear-gradient(#f2f8fb,#f2f8fb);
+         }
+         .operator1{
+         background-color: #53666c;
+         color:white;
+         border:none;
+         }
+         .key-decor{
+         border-radius: 5px;
+         border: 0 solid black;
+         }
+         .operator-ac{
+         background-color: #1f2426;
+         color:white;
+         border:none;
+         }
+         @media only screen and (min-width: 600px) and (max-width: 760px) {
+         .calculator {
+         margin-top: 150px;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 300px;
+         height: auto;
+         box-shadow: 0 0 35px black;
+         }
+         }
+      </style>
+      <script type="text/javascript">
+         var displayVal='';
+         var previousVal=0;
+         var opt='+';
+         var result;
+         function toggleOff(){
+           var offb = document.getElementById("offbtn").style.backgroundColor="#800000";
+           var onthisbtn = document.getElementById("onbtn").style.backgroundColor="#1f2426"
+           var dat1 = document.getElementsByClassName("offButtons");
+           for(i=0;i<dat1.length;i++)
+           {
+             dat1[i].disabled=true;
+             dat1[i].style.pointerEvents="none";
+           }
+           displayVal="";
+           previousVal=0;
+           opt='+';
+           document.getElementById("result").value="";
+         }
+         function toggleOn(){
+           var offb = document.getElementById("onbtn").style.backgroundColor="#800000";
+           var onthisbtn = document.getElementById("offbtn").style.backgroundColor="#1f2426"
+           var dat1 = document.getElementsByClassName("onButtons");
+           for(i=0;i<dat1.length;i++)
+           {
+             dat1[i].disabled=false;
+             dat1[i].style.pointerEvents="auto";
+           }
+         }
+         function calculate(operand) //for operands
+         {
+           displayVal+=operand;
+           document.getElementById('result').value = displayVal;
+         }
+         function all_clear()
+         {
+           displayVal="";
+           previousVal=0;
+           opt='+';
+           document.getElementById("result").value="";
+         }
+         function operation(operator) //for operators
+         {
+         	
+           switch(opt)
+           {
+             case '+':
+             result = parseFloat(parseFloat(previousVal)+ parseFloat(displayVal));
+             document.getElementById('result').value = result;
+             break;
+             case '-':
+             result = parseFloat(parseFloat(previousVal) - parseFloat(displayVal));
+             document.getElementById('result').value = result;
+             break;
+             case '*':
+             result = parseFloat(parseFloat(previousVal)*parseFloat(displayVal));
+             document.getElementById('result').value = result;
+             break;
+             case '/':
+             result = parseFloat(parseFloat(previousVal)/parseFloat(displayVal));
+             document.getElementById('result').value = result;
+             break;
+             case '=':
+             document.getElementById('result').value = result;
+             break;
+           }
+           displayVal='';
+           previousVal=result;
+           opt=operator;
+         }
+      </script>
+   </head>
+   <body id="bodyId" style="background-color: #eee">
+      <div class="calculator">
+         <input type="text" id="result" class="calculator-screen" style="pointer-events: none; font-size: 30px;color: black">
+         <div class="calculator-keys">
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('9')">9</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('8')">8</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('7')">7</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('6')">6</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('5')">5</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('4')">4</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('3')">3</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('2')">2</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('1')">1</button>
+            <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="operation('+')">+</button>
+            <button type="button" class="key-decor offButtons onButtons" onclick="calculate('0')">0</button>
+            <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="operation('-')">-</button>
+            <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="calculate('.')">.</button>
+            <button type="button" class="operator1 offButtons onButtons hoverOnOperations" id="mulbtn" onclick="operation('*')">*</button>
+            <button type="button" class="operator1 offButtons onButtons hoverOnOperations" id="divbtn" onclick="operation('=')" >=</button>
+            <!-- AC ON AND OFF BUTTONS -->
+            <button type="button" class="operator1 offButtons onButtons hoverOnOperations" onclick="operation('/')">/</button>
+            <button class="operator-ac" id="onbtn" onclick="toggleOn()" style="background-color: #800000">On</button>
+            <button type="button" class="operator-ac" id="offbtn" onclick="toggleOff()">Off</button>
+            <button type="button" class="operator-ac offButtons onButtons" id="acbtn" onclick="all_clear()" style="grid-column: 1 / 4">AC</button>
+         </div>
+      </div>
+   </body>
 </html>
